@@ -46,7 +46,7 @@ Features
 
 Scrape the data from the YouTube API, including channel information, playlists, videos, and comments.
 Store the retrieved data in a MongoDB database.
-Migrate the data to a MySQL.
+Migrate the data to MySQL.
 Analyze and visualize the data using Streamlit and Plotly.
 Perform queries on the MySQL.
 Gain insights into channel performance, video metrics, and more.
@@ -61,7 +61,7 @@ The retrieved data is stored in a MongoDB database. This storage process ensures
 
 Migrating data to a MySQL
 
-The application allows users to migrate data from MongoDB to a MySQL. Users can choose which channel's data to migrate. To ensure compatibility with a structured format, the data is cleansed using the powerful pandas library. Following data cleaning, the information is segregated into separate tables, including channels, playlists, videos, and comments, utilizing SQL queries.
+The application allows users to migrate data from MongoDB to MySQL. Users can choose which channel's data to migrate. To ensure compatibility with a structured format, the data is cleansed using the powerful pandas library. Following data cleaning, the information is segregated into separate tables, including channels, playlists, videos, and comments, utilizing SQL queries.
 
 Data Analysis
 
