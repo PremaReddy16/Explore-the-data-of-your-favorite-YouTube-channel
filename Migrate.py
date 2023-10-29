@@ -3,6 +3,7 @@ import time
 import streamlit as st
 import mysql.connector
 import pymongo
+# CONNECTING WITH MYSQL DATABASE
 conn = st.experimental_connection('youtube', 'sql',url="mysql://premareddy:myloveyash@127.0.0.1:3306/youtube")
 con = mysql.connector.connect(user='premareddy',password='myloveyash',host='127.0.0.1',database='youtube')
 cursor=con.cursor()
@@ -14,14 +15,16 @@ def app():
     client = pymongo.MongoClient(f"""mongodb+srv://premavinayaki:Ursyash8@cluster0.ijigeb9.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp""")
     db = client['YT-db']
     collections=db['ChannelStatistics']
-                
+
+# FUNCTION TO GET CHANNEL NAMES FROM MONGODB
     def channel_names():   
         Channels = []             
         for i in collections.find():
             Channels.append(i['Channel details']['Channel_name'])
         return Channels
     names=channel_names()
-    
+
+# FUNCTION TO INSERT THE STORED DATA INTO MYSQL
     def insertdocs(details):
         sql_ch='''INSERT INTO CHSS(CHANNEL_ID, CHANNEL_NAME, CHANNEL_DESCRIPTION, Viewcount, SUBSCRIBERS, TOTAL_VIDEOS, UPLOAD_ID) values (%s, %s, %s, %s, %s, %s, %s)'''
         val=tuple(details['Channel details'].values())
