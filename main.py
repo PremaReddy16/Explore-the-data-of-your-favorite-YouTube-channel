@@ -12,8 +12,8 @@ class MultiApp:
             app=option_menu(menu_title='Analyzing',options=['Exploring','Scrape data', 'Flit data', 'Visualize data','Thanks'],
                 icons=['chat-text-fill','chat-fill','info-circle-fill','bar-chart-fill','person-circle'],
                 default_index=0, 
-                styles={"icon": {"color": "white", "font-size": "20px"}, 
-                        "nav-link": {"color":"white","font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "blue"},
+                styles={"icon": {"color": "purple", "font-size": "20px"}, 
+                        "nav-link": {"color":"black","font-size": "18px", "text-align": "left", "margin":"0px", "--hover-color": "blue"},
                         "nav-link-selected": {"background-color": "#02ab21"},})
 
         if app == "Exploring":
