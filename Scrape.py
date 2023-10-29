@@ -11,13 +11,15 @@ def app():
     st.title('Scrape & Store')
     st.write('_Extract and store your channel data by just giving the channel id_')
     st.write("(_Hint: Goto channel's home page > click about > share > copy channel id_)")                  
- 
+    
+ # BUILDING CONNECTION WITH YOUTUBE API
     api_service_name= "youtube"
     api_version = "v3"
     DEVELOPER_KEY = "AIzaSyBjLgKtdAMdYqRx0Dpi60RFsIrcfcWZKv4"
     youtube = googleapiclient.discovery.build(
                 api_service_name, api_version, developerKey = DEVELOPER_KEY)
 
+# FUNCTION TO GET CHANNEL DETAILS
     def channeldetails(channel_id):
 
         request = youtube.channels().list(
@@ -33,6 +35,7 @@ def app():
                     Upload_id=response['items'][0]['contentDetails']['relatedPlaylists']['uploads'])
         return c_stats    
 
+# FUNCTION TO GET PLAYLIST DETAILS
     def playlists(channel_id):
         pls=[]          
         request = youtube.playlists().list(
@@ -47,7 +50,8 @@ def app():
                         Playlist_count=response['items'][k]['contentDetails']['itemCount'])
             pls.append(p_stats)                    
         return pls    
-   
+
+# FUNCTION TO GET VIDEO IDS
     def get_video_ids(Upload_id):
         video_ids=[]    
         request = youtube.playlistItems().list(
@@ -74,6 +78,7 @@ def app():
                 next_page_token=response.get('nextPageToken')               
         return video_ids    
 
+# FUNCTION TO GET VIDEO DETAILS
     def get_video_details(youtube, video_ids):
         all_video_stats = []    
         for j in range(0, len(video_ids), 50):
@@ -94,6 +99,7 @@ def app():
                 all_video_stats.append(v_stats)
         return all_video_stats    
 
+# FUNCTION TO GET COMMENT DETAILS
     def get_comment_details(video_ids):
             allcomments=[]
             for j in video_ids:
@@ -114,6 +120,7 @@ def app():
                     pass                
             return allcomments    
 
+# FUNCTION THAT COMBINES THE ABOVE FUNCTIONS
     def main(channel_id):
         datacombo=channeldetails(channel_id)
         pl=playlists(channel_id)
@@ -127,16 +134,18 @@ def app():
                 'Comment details': cm}
         return data    
 
+#USER INPUT THAT EXTRACTS AND DISPLAY THE DATA
     channel_id = st.sidebar.text_input('Enter Channel Id')
     if st.sidebar.button("Scrape"):
        d=main(channel_id)
        st.write(d)
 
+#FUNCTION TO STORE THE EXTRACTED DATA IN MONGODB
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
 
     def click_button():
-
+# Bridging a connection with MongoDB Atlas and the database
         connection_string=f"""mongodb+srv://premavinayaki:Ursyash8@cluster0.ijigeb9.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"""
         client = pymongo.MongoClient(connection_string)
         db = client.get_database('YT-db')
