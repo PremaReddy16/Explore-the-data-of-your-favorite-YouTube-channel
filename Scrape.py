@@ -91,7 +91,6 @@ def app():
                                 Channel_id=response['items'][i]['snippet']['channelId'],
                                 Title=response['items'][i]['snippet']['title'],
                                 Video_description=response['items'][i]['snippet']['description'],
-                                Thumbnails=response['items'][i]['snippet']['thumbnails'].get('url'),
                                 Published_date=datetime.fromisoformat(response['items'][i]['snippet']['publishedAt'].replace('z','')),
                                 Views=response['items'][i]['statistics']['viewCount'],
                                 Likes=response['items'][i]['statistics'].get('likeCount'),
