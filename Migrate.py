@@ -35,7 +35,7 @@ def app():
             val=tuple(i.values())
             cursor.execute(plys_list, val)
         
-        vslist ='''INSERT INTO VIDEO_SS(VIDEO_ID, CHANNEL_ID, VIDEO_NAME, DESCRIPTION, THUMBNAILS, PUBLISHED_DATE, VIEWS, LIKES, TOTALCOMMENTS)values (%s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+        vslist ='''INSERT INTO VIDEO_SS(VIDEO_ID, CHANNEL_ID, VIDEO_NAME, DESCRIPTION, PUBLISHED_DATE, VIEWS, LIKES, TOTALCOMMENTS)values (%s, %s, %s, %s, %s, %s, %s, %s)'''
         for j in details['Video details']:
             val=tuple(j.values())
             cursor.execute(vslist, val)
